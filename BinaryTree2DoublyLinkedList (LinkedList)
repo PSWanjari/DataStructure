@@ -1,0 +1,26 @@
+// This function should convert a given Binary tree to Doubly
+// Linked List
+void convertToDLL(Node *root, Node **head_ref,Node** pre)
+{
+     if(root==NULL)
+    {
+        return;
+    }
+    
+    convertToDLL(root->left,head_ref,pre);
+   
+    if(*pre==NULL)
+    {
+        *head_ref=root;
+    }else{
+        (*pre)->right=root;
+        root->left=*pre;
+    }
+    *pre=root;
+    convertToDLL(root->right,head_ref,pre); 
+}
+void bToDLL(Node *root, Node **head_ref)
+{
+  Node * pre =NULL;
+  convertToDLL(root,head_ref,&pre);
+}
