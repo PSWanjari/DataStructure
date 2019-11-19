@@ -1,0 +1,85 @@
+////////////////////////////////////////////  problem statement //////////////////////////////////////////////////////////////
+Write a program to print Binary representation of a given number N.
+
+Input:
+The first line of input contains an integer T, denoting the number of test cases. Each test case contains an integer N.
+
+Output:
+For each test case, print the binary representation of the number N in 14 bits.
+
+Constraints:
+1 ≤ T ≤ 100
+1 ≤ N ≤ 5000
+
+Example:
+Input:
+2
+2
+5
+
+Output:
+00000000000010
+00000000000101
+
+/////////////////////////////////////////////  solution one   /////////////////////////////////////////////////////////////////////
+1) Let us take number 'NUM' and we want to check whether it's 0th bit is ON or OFF    
+    bit = 2 ^ 0 (0th bit)
+    if  NUM & bit == 1 means 0th bit is ON else 0th bit is OFF
+
+2) Similarly if we want to check whether 5th bit is ON or OFF    
+    bit = 2 ^ 5 (5th bit)
+    if NUM & bit == 1 means its 5th bit is ON else 5th bit is OFF.
+
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+	int i,t,num,ans;
+	float bit;
+	scanf("%d",&t);
+	for(i=0;i<t;i++)
+	{
+	    scanf("%d",&num);
+	    bit=13.0;
+	    while(bit>=0.0)
+	    {
+	        ans=pow(2.0,bit);
+	        if((ans&num)>0)
+	        {
+	            printf("1");
+	        }else{
+	            printf("0");
+	        }
+	        bit--;
+	    }
+	    printf("\n");
+	}
+	return 0;
+}
+////////////////////////////////////////////////////////  Solution two  ///////////////////////////////////////////////////////////////
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+	int i,t,num,j,ans;
+	float bit;
+	scanf("%d",&t);
+	for(i=0;i<t;i++)
+	{
+	    scanf("%d",&num);
+	    for(j=13;j>=0;j--)
+	    {
+	       if((num>>j)&1==1)
+	       {
+	           printf("1");
+	       }else{
+	           printf("0");
+	       }
+	    }
+	    printf("\n");
+	  
+	}
+	return 0;
+}
+
+Author : Pratik Wanjari
