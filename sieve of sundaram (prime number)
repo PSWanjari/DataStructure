@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+char marked[1000000000];
+
+//function to grt prime number;
+int sieveSundarum(long long num)
+{
+    long long int i,j,newNum=(num-2)/2,count=0;
+    // In general Sieve of Sundaram, produces primes smaller
+	// than (2*x + 2) for a number given number x.
+	// Since we want primes smaller than n, we reduce n to half
+
+	// This array is used to separate numbers of the form i+j+2ij
+	// from others where 1 <= i <= j
+    memset(marked,'f',1000000000);
+
+    // Main logic of Sundaram. Mark all numbers of the
+	// form i + j + 2ij as true where 1 <= i <= j
+    for(i=1;i<=newNum;i++)
+        for(j=i;(i+j+2*i*j)<=newNum;j++)
+           {
+               marked[i+j+2*i*j]='t';
+           }
+
+    for(i=1;i<=newNum;i++)
+    {
+        if(marked[i]=='f' && i!=2)
+        {
+            count++;
+            printf("%lld ",2*i+1);
+        }
+    }
+    return count;
+}
