@@ -1,0 +1,91 @@
+/////////////////////////////////////////   Problem /////////////////////////////////////////////////////////////////////////
+Given a number N, print least prime factors for all numbers from 1 to N.  The least prime factor of an integer N is the smallest prime number that divides it. The least prime factor of all even numbers is 2. A prime number is its own least prime factor (as well as its own greatest prime factor).  Note : 1 needs to be printed for 1.
+
+Input: N = 6
+Output: 1 2 3 2 5 2
+The first line of input contains an integer T denoting the number of test cases.
+The first line of each test case is N.
+
+Output:
+Print least prime factors separated by space
+
+
+Constraints:
+1 ≤ T ≤ 200
+2 ≤ N ≤ 1000
+
+Example:
+Input:
+2
+6
+10
+
+Output:
+1 2 3 2 5 2
+1 2 3 2 5 2 7 2 3 2
+
+////////////////////////////////////////////  Soluition /////////////////////////////////////////////////////////////////////////
+Algorithm
+1 Create a list of consecutive integers from 2 through n: (2, 3, 4, …, n).
+2 Initially, let i equal 2, the smallest prime number.
+3 Enumerate the multiples of i by counting to n from 2i in increments of i, and mark them as having least prime factor as i (if not already marked). Also mark i as least prime factor of i (i itself is a prime number).
+4 Find the first number greater than i in the list that is not marked. If there was no such number, stop. Otherwise, let i now equal this new number (which is the next prime), and repeat from step 3.
+
+
+#include<stdio.h>
+int primes[10002];
+
+int array[100];
+int max=0;
+void _initPrime(int num)
+{
+    int i;
+    for(i=0;i<num;i++)
+    {
+        primes[i]=-1;
+    }
+}
+int main()
+{
+  int t,j,i;
+  _initPrime(10002);
+  primes[1]=1;
+  scanf("%d",&t);
+  for(i=0;i<t;i++)
+  {
+    scanf("%d",&array[i]);
+    if(max<array[i])
+    {
+        max=array[i];
+    }
+
+  }
+
+  for(i=2;i<=max;i++)
+  {
+     
+      if(primes[i]==-1)
+      {
+         primes[i]=i;
+         for(j=2;j*i<=max;j++)
+          {
+              if(primes[j*i]==-1)
+              {
+                   primes[j*i]=i;
+              }
+             
+          }
+      }
+
+  }
+
+   for(j=0;j<t;j++)
+   {
+      for(i=1;i<=array[j];i++)
+      {
+          printf("%d ",primes[i]);
+      }
+      printf("\n");
+   }
+
+}
