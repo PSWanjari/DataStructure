@@ -1,0 +1,108 @@
+/////////////////////////////////////////////// Problem ///////////////////////////////////////////////////////////////////////////
+Given a matrix with 0 and 1’s, find the largest rectangle of all 1’s in the matrix. The rectangle can be formed by swapping any pair of columns of given matrix.
+
+Input:
+
+The first line of input contains an integer T denoting the number of test cases. 
+
+First line of each test case contains two elements R and C.The following line contains R*C numbers each (representing the matrix).
+Output:
+
+print the max area in a new line for each test case.
+Constraints:
+
+1<=T<=100
+
+1<=R,C<=15
+Example:
+
+Input:
+2
+2 3
+1 1 1 0 1 1
+2 2
+1 0 1 1
+
+Output:
+
+4
+2
+
+//////////////////////////////////////////// solution ///////////////////////////////////////////////////////////
+
+#include<stdio.h>
+int mat[15][15];
+long long int sort(int array[],int size)
+{
+    long long int temp, max=0;
+    int i,j;
+    
+    for(i=0;i<size-1;i++)
+    {
+        for(j=i+1;j<size;j++)
+        {
+            if(array[i]<array[j])
+            {
+                temp=array[i];
+                array[i]=array[j];
+                array[j]=temp;
+            }
+        }
+    }
+  
+    for(i=0;i<size;i++)
+    {
+        if(max<(array[i]*(i+1)))
+        {
+            max=array[i]*(i+1);
+        }
+    }
+    
+    return max;
+}
+int main()
+{
+	int i,j,t,k,row,max,temp,col;
+	scanf("%d",&t);
+	for(i=0;i<t;i++)
+	{
+	    max=0;
+	    scanf("%d %d",&row,&col);
+	    for(j=0;j<row;j++)
+	    {
+	        for(k=0;k<col;k++)
+	        {
+	            scanf("%d",&mat[j][k]);
+	        }
+	    }
+	  
+	     for(j=1;j<row;j++)
+	    {
+	        for(k=0;k<col;k++)
+	        {
+	            if(mat[j-1][k]!=0 && mat[j][k]!=0)
+	            {
+	                mat[j][k]=mat[j-1][k]+1;
+	            }
+	           
+	        }
+	       
+	       
+	    }
+	   
+	     for(j=0;j<row;j++)
+	    {
+	        temp=sort(mat[j],col);
+	        if(temp>max)
+	        {
+	            max=temp;
+	        }
+	    }
+	    printf("%d\n",max);
+	    
+	    
+	}
+	return 0;
+}
+
+author:pratik wanjari
