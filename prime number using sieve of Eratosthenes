@@ -1,0 +1,66 @@
+///////////////////////////////////// problem /////////////////////////////////////////////////////////////////////////
+Given a number N, calculate the prime numbers upto N using Sieve of Eratosthenes.  
+
+Input: 
+The first line of the input contains T denoting the number of testcases. T testcases follow. Each testcase contains one line of input containing N.
+
+Output: 
+For all testcases, in a new line, print all the prime numbers upto or equal to N.
+
+Constraints:
+1 <= T<= 100
+1 <= N <= 104
+
+Example:
+Input:
+2
+10
+35
+Output:
+2 3 5 7
+2 3 5 7 11 13 17 19 23 29 31 
+
+////////////////////////////////////////////// solution /////////////////////////////////////////////////////////////////////////
+
+#include<stdio.h>
+char primes[10002];
+
+int array[100];
+int max=0;
+int main()
+{
+  int t,j,i;
+  memset(primes,'t',10002);
+  primes[1]='f';
+  scanf("%d",&t);
+  for(i=0;i<t;i++)
+  {
+    scanf("%d",&array[i]);
+    if(max<array[i])
+    {
+        max=array[i];
+    }
+
+  }
+
+  for(i=2;i<=sqrt(max);i++)
+  {
+      for(j=2;j*i<=max;j++)
+      {
+          primes[j*i]='f';
+      }
+  }
+
+   for(j=0;j<t;j++)
+   {
+      for(i=1;i<=array[j];i++)
+      {
+          if(primes[i]=='t')
+          {
+              printf("%d ",i);
+          }
+      }
+      printf("\n");
+   }
+
+}
